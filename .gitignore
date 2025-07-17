@@ -13,3 +13,6 @@ a.out
 *.nfs.*
 *.plist
 .idea
+venv/*
+__pycache__/*
+books.db
