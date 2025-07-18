@@ -16,21 +16,28 @@
 | `DB_MAX_OVERFLOW` | `10`                                     | SQLAlchemy max overflow connections beyond the pool size.       |
 
 
-## Mac Instructions ## 
+Adding my own instructions below existing README
+
+## Instructions for setup
+
+**Required dependencies** 
+[Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Docker](https://docs.docker.com/engine/install/)
+[python](https://www.python.org/downloads/)
+
+**Install Dependencies** 
 python3 -m venv venv
 source venv/bin/activate
 
-## Install Dependencies ##
-To run install the following
-pip install -r requirements.txt
+## To Run
+In terminal run the following
+**docker-compose up --build**
 
-**Run the API**
-uvicorn main:app --host 0.0.0.0 --port 8080 --reload
-
-## Visit the API ##
+## Visit the API once everything running
 Open your browser and go to:
     Swagger Docs: http://localhost:8080/docs
     Redoc: http://localhost:8080/redoc
 
-## To Run It ##
-docker-compose up --build
+**Note:** 
+If you like to have the build only build and not run will need to comment out the CMD line (26) in the the Dockerfile.
+Then to run the programme you will use
+uvicorn main:app --host 0.0.0.0 --port 8080 --reload

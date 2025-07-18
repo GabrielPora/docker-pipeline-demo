@@ -22,4 +22,5 @@ ENV PORT=8080
 ENV RELOAD=False
 
 # Run Uvicorn server
+# If you do not want the build to run comment out the below line
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
