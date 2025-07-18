@@ -38,6 +38,10 @@ Open your browser and go to:
     Redoc: http://localhost:8080/redoc
 
 **Note:** 
+I have added a testExample.json file for you to load a test book when going to the Swagger docs. Paste it in the Create section
+
+![alt text](createBook.gif)
+
 If you like to have the build only build and not run will need to comment out the CMD line (26) in the the Dockerfile.
 Then to run the programme you will use
 uvicorn main:app --host 0.0.0.0 --port 8080 --reload
