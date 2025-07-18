@@ -6,7 +6,9 @@ on:
       - main
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/docker-pipeline-demo
+# note could not use IMAGE_NAME: ghcr.io/${{ github.repository }} due to my username having uppercase in it
+# which is not allowed in image names, so using repository_owner instead
 
 jobs:
   build-and-push:
