@@ -18,21 +18,33 @@
 
 Adding my own instructions below existing README
 
-## Instructions for setup
+# Instructions for setup
 
 **Required dependencies** 
-[Docker Desktop](https://www.docker.com/products/docker-desktop/) or [Docker](https://docs.docker.com/engine/install/)
+[Docker](https://docs.docker.com/engine/install/)
+[Docker Desktop](https://www.docker.com/products/docker-desktop/)
 [python](https://www.python.org/downloads/)
+[helm](https://helm.sh/docs/intro/install/)
 
 **Install Dependencies** 
-python3 -m venv venv
-source venv/bin/activate
+**python3 -m venv venv**
+**source venv/bin/activate**
 
-## To Run
+# Helm setup
+## Package the chart
+helm package helm/bookstore-api
+
+## Deploy to a cluster
+helm upgrade --install bookstore-api ./bookstore-api-1.0.0.tgz \
+  --namespace bookstore --create-namespace
+
+
+# To Run
 In terminal run the following
 **docker-compose up --build**
 
-## Visit the API once everything running
+
+# Visit the API once everything running
 Open your browser and go to:
     Swagger Docs: http://localhost:8080/docs
     Redoc: http://localhost:8080/redoc

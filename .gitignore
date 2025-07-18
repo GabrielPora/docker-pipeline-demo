@@ -16,3 +16,4 @@ a.out
 venv/*
 __pycache__/*
 books.db
+*.tgz
