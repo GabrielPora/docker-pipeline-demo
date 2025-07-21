@@ -5,6 +5,8 @@
 [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 [python](https://www.python.org/downloads/)
 [helm](https://helm.sh/docs/intro/install/)
+[Minikube](https://minikube.sigs.k8s.io/docs/start/)
+[Kubernetes](https://kind.sigs.k8s.io/)
 
 **Install Dependencies** 
 ```Bash
@@ -42,7 +44,7 @@ docker build -t bookstore-api .
 docker run -p 8080:8080 bookstore-api
 ```
 
-If using Docker Compose
+**If using Docker Compose**
 In terminal run the following
 ```Bash
 docker compose up --build
@@ -58,15 +60,24 @@ Image URL:
 ```Bash
 ghcr.io/gabrielpora/docker-pipeline-demo:latest
 ```
-Pull GHCR Image:
+**Pull GHCR Image:**
 ```Bash
 docker pull ghcr.io/gabrielpora/docker-pipeline-demo:latest
+```
+**Run the image**
+```Bash
+docker run -d -p 8080:8080 ghcr.io/gabrielpora/docker-pipeline-demo:latest
+```
+
+**🧪 Test image locally**
+```Bash
+docker run -it --rm -p 8080:8080 ghcr.io/<your-username>/docker-pipeline-demo:latest
 ```
 
 Workflow:  [.github/workflows/docker-image.yml](.github/workflows/docker-image.yml)
 
 
-# ☸️ Helm (Kubernetes Deployment)
+# ☸️ Helm (Kubernetes Deployment, Minikube or Kubernetes)
 📁 Helm Chart Structure
 
 Located in: helm/bookstore-api/
@@ -83,11 +94,44 @@ Includes:
 
     values.yaml
 
-**Install on any cluster**
+## Option 1: Minikube:
+**▶️ Run using Minikube**
+Start a Local Cluster 
+```Bash
+minikube start
+```
+
+**📁Install Helm Chart**
 ```Bash
 helm install bookstore-api ./helm/bookstore-api \
   --set image.repository=ghcr.io/gabrielpora/docker-pipeline-demo \
   --set image.tag=latest
+```
+
+**🧼 Best practice: Clean Up Old Releases**
+```Bash
+helm uninstall bookstore-api
+```
+
+**Check Pods and Services**
+```Bash
+kubectl get pods
+```
+```Bash
+kubectl get svc
+```
+
+**🌐 Access the API (via Port Forwarding or Ingress)**
+**Option 1: Port Forwarding**
+```Bash
+kubectl port-forward svc/bookstore-api 8080:8080
+```
+Now visit: http://localhost:8080/docs
+
+**Option 2: Ingress (Optional Setup)**
+If your cluster supports ingress (like Minikube with ingress addon):
+```Bash
+minikube addons enable ingress
 ```
 
 **Override environment**
@@ -107,6 +151,7 @@ helm package helm/bookstore-api
 helm upgrade --install bookstore-api ./bookstore-api-1.0.0.tgz \
   --namespace bookstore --create-namespace
 ```
+
 
 # ⚙️ Configuration 
 **Bookstore API Config**
