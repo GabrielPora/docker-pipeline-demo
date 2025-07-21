@@ -9,18 +9,36 @@
 **Install Dependencies** 
 ```Bash
 python3 -m venv venv
+```
+```Bash
 source venv/bin/activate
+```
+
+**Note the below is needed for local running**
+Install pip for python then install the below
+[pip for python](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+*Then you can run the below in order*
+```Bash
+pip install flask-sqlalchemy
+```
+```Bash
+pip install uvicorn
+```
+```Bash
+pip install fastapi
 ```
 
 # ▶️ Run Locally
 ```Bash
-uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+uvicorn main:app --host 0.0.0.0 --port 8080 --reload
 ```
 
 # 🐳 Docker
 **Build & Run**
 ```Bash
 docker build -t bookstore-api .
+```
+```Bash
 docker run -p 8080:8080 bookstore-api
 ```
 
@@ -31,7 +49,7 @@ docker compose up --build
 ```
 
 # 🚀 GitHub Actions CI/CD
-Every push to main triggers:
+Every push to **main** triggers:
 
     Build Docker image
 
@@ -39,6 +57,10 @@ Every push to main triggers:
 Image URL:
 ```Bash
 ghcr.io/gabrielpora/docker-pipeline-demo:latest
+```
+Pull GHCR Image:
+```Bash
+docker pull ghcr.io/gabrielpora/docker-pipeline-demo:latest
 ```
 
 Workflow:  [.github/workflows/docker-image.yml](.github/workflows/docker-image.yml)
