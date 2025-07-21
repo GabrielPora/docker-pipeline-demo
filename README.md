@@ -7,20 +7,28 @@
 [helm](https://helm.sh/docs/intro/install/)
 
 **Install Dependencies** 
-**python3 -m venv venv**
-**source venv/bin/activate**
+```Bash
+python3 -m venv venv
+source venv/bin/activate
+```
 
 # ▶️ Run Locally
+```Bash
 uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+```
 
 # 🐳 Docker
-## Build & Run
-**docker build -t bookstore-api .**
-**docker run -p 8080:8080 bookstore-api**
+**Build & Run**
+```Bash
+docker build -t bookstore-api .
+docker run -p 8080:8080 bookstore-api
+```
 
-## If using Docker Compose
+If using Docker Compose
 In terminal run the following
-**docker compose up --build**
+```Bash
+docker compose up --build
+```
 
 # 🚀 GitHub Actions CI/CD
 Every push to main triggers:
@@ -29,7 +37,9 @@ Every push to main triggers:
 
     Push to GitHub Container Registry (GHCR)
 Image URL:
-**ghcr.io/gabrielpora/docker-pipeline-demo:latest**
+```Bash
+ghcr.io/gabrielpora/docker-pipeline-demo:latest
+```
 
 Workflow:  [.github/workflows/docker-image.yml](.github/workflows/docker-image.yml)
 
@@ -51,22 +61,30 @@ Includes:
 
     values.yaml
 
-## Install on any cluster
-**helm install bookstore-api ./helm/bookstore-api \
+**Install on any cluster**
+```Bash
+helm install bookstore-api ./helm/bookstore-api \
   --set image.repository=ghcr.io/gabrielpora/docker-pipeline-demo \
-  --set image.tag=latest**
+  --set image.tag=latest
+```
 
-## Override environment
-**helm install bookstore-api ./helm/bookstore-api \
-  --values env/dev.yaml**
+**Override environment**
+```Bash
+helm install bookstore-api ./helm/bookstore-api \
+  --values env/dev.yaml
+```
 
 
-## Package the chart
+**Package the chart**
+```Bash
 helm package helm/bookstore-api
+```
 
-## Deploy to a cluster
+**Deploy to a cluster**
+```Bash
 helm upgrade --install bookstore-api ./bookstore-api-1.0.0.tgz \
   --namespace bookstore --create-namespace
+```
 
 # ⚙️ Configuration 
 **Bookstore API Config**
@@ -88,7 +106,7 @@ helm upgrade --install bookstore-api ./bookstore-api-1.0.0.tgz \
 
 
 
-# Visit the API once everything running
+## Visit the API once everything running
 Open your browser and go to:
     Swagger Docs: http://localhost:8080/docs
     Redoc: http://localhost:8080/redoc
