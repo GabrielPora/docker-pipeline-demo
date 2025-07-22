@@ -13,6 +13,7 @@ ingress:
   host: bookstore.local
   path: /
   pathType: Prefix
+  port: 8080
 
 env:
   APP_ENV: dev
