@@ -5,8 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: bookstore-api
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    app: bookstore-api
   ports:
     - name: http
       port: 8080              # External port (in-cluster service)
