@@ -108,17 +108,17 @@ helm install bookstore-api ./helm/bookstore-api \
   --set image.tag=latest
 ```
 
-**🧼 Best practice: Clean Up Old Releases**
-```Bash
-helm uninstall bookstore-api
-```
-
 **Check Pods and Services**
 ```Bash
 kubectl get pods
 ```
 ```Bash
 kubectl get svc
+```
+
+**🧼 Best practice: Clean Up Old Releases**
+```Bash
+helm uninstall bookstore-api
 ```
 
 **🌐 Access the API (via Port Forwarding or Ingress)**
