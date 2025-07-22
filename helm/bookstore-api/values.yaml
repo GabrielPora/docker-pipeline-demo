@@ -19,6 +19,7 @@ ingress:
 env:
   APP_ENV: prod
   PAGE_SIZE: "10"
-  DATABASE_URL: postgresql://postgres:postgres@bookstore-db:5432/books
+  DATABASE_URL: "sqlite:///./books.db"
+  LOG_LEVEL: "INFO"
 
 resources: {}
