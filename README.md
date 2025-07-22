@@ -133,6 +133,7 @@ If your cluster supports ingress (like Minikube with ingress addon):
 ```Bash
 minikube addons enable ingress
 ```
+Then, update your /etc/hosts file with the hostname (bookstore.local) and map it to your Minikube IP.
 
 **Override environment**
 ```Bash
