@@ -71,7 +71,7 @@ docker run -d -p 8080:8080 ghcr.io/gabrielpora/docker-pipeline-demo:latest
 
 **🧪 Test image locally**
 ```Bash
-docker run -it --rm -p 8080:8080 ghcr.io/<your-username>/docker-pipeline-demo:latest
+docker run -it --rm -p 8080:8080 ghcr.io/gabrielpora/docker-pipeline-demo:latest
 ```
 
 Workflow:  [.github/workflows/docker-image.yml](.github/workflows/docker-image.yml)
