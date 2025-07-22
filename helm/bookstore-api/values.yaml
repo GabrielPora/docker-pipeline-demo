@@ -1,5 +1,3 @@
-replicaCount: 2
-
 image:
   repository: ghcr.io/gabrielpora/docker-pipeline-demo
   tag: latest
@@ -17,7 +15,7 @@ ingress:
   pathType: Prefix
 
 env:
-  APP_ENV: prod
+  APP_ENV: dev
   PAGE_SIZE: "10"
   DATABASE_URL: "sqlite:///./books.db"
   LOG_LEVEL: "INFO"
