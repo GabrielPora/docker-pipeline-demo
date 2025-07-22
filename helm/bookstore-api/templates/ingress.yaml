@@ -4,8 +4,8 @@ metadata:
   name: bookstore-api
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
   rules:
     - host: bookstore.local     # Replace this with your real domain or add to /etc/hosts for local
       http:

@@ -116,11 +116,6 @@ kubectl get pods
 kubectl get svc
 ```
 
-**🧼 Best practice: Clean Up Old Releases**
-```Bash
-helm uninstall bookstore-api
-```
-
 **🌐 Access the API (via Port Forwarding or Ingress)**
 **Option 1: Port Forwarding**
 ```Bash
@@ -135,12 +130,17 @@ minikube addons enable ingress
 ```
 Then, update your /etc/hosts file with the hostname (bookstore.local) and map it to your Minikube IP.
 
+
+**🧼 Best practice: Clean Up Old Releases**
+```Bash
+helm uninstall bookstore-api
+```
+
 **Override environment**
 ```Bash
 helm install bookstore-api ./helm/bookstore-api \
   --values env/dev.yaml
 ```
-
 
 **Package the chart**
 ```Bash
