@@ -130,21 +130,34 @@ minikube addons enable ingress
 ```
 Then, update your /etc/hosts file with the hostname (bookstore.local) and map it to your Minikube IP.
 
+**🧪 Test working**
+Follow instructions at end of the doc to populate books using the swagger page.
+You can run the below once completed.
+```Bash
+curl http://bookstore.local:8080/books/
+```
+Should see a json result 
+```Json
+[{"id":1,"title":"Test","author":"Tester","description":"Test description string","price":99.0}]
+```
 
-**🧼 Best practice: Clean Up Old Releases**
+**🧼 Best practice: If having issues Clean Up Old Releases**
 ```Bash
 helm uninstall bookstore-api
 ```
 
-**Override environment**
+Wait a few seconds, then check if the Ingress resource is gone:
 ```Bash
-helm install bookstore-api ./helm/bookstore-api \
-  --values env/dev.yaml
+kubectl get ingress -A
 ```
 
-**Package the chart**
+If you still see an Ingress for bookstore.local, delete it manually:
 ```Bash
-helm package helm/bookstore-api
+kubectl delete ingress <ingress-name> -n <namespace>
+```
+**For Example**
+```Bash
+kubectl delete ingress bookstore-api -n bookstore
 ```
 
 **Deploy to a cluster**
