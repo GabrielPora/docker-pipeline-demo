@@ -7,13 +7,13 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
-    - host: bookstore.local     # Replace this with your real domain or add to /etc/hosts for local
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: {{ .Values.ingress.path }}
+            pathType: {{ .Values.ingress.pathType }}
             backend:
               service:
-                name: bookstore-api
+                name: {{ include "bookstore-api.fullname" . }}
                 port:
-                  number: 8080
+                  number: {{ .Values.service.port }}

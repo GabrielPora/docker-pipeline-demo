@@ -1,3 +1,5 @@
+replicaCount: 1
+
 image:
   repository: ghcr.io/gabrielpora/docker-pipeline-demo
   tag: latest
@@ -20,5 +22,7 @@ env:
   PAGE_SIZE: "10"
   DATABASE_URL: "sqlite:///./books.db"
   LOG_LEVEL: "INFO"
+  LOG_FORMAT: "%(levelname)s:%(name)s:%(message)s"
+  ALLOWED_ORIGINS: "*"
 
 resources: {}

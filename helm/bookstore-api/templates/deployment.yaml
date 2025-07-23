@@ -1,27 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bookstore-api
-  labels:
-    app: bookstore-api
+  name: {{ include "bookstore-api.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: bookstore-api
+      app: {{ include "bookstore-api.name" . }}
   template:
     metadata:
       labels:
-        app: bookstore-api
+        app: {{ include "bookstore-api.name" . }}
     spec:
       containers:
-        - name: bookstore-api
+        - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8080
-              protocol: TCP
-          envFrom:
-            - configMapRef:
-                name: bookstore-api
+              containerPort: {{ .Values.service.targetPort | default .Values.service.port }}
+          env:
+            - name: APP_ENV
+              value: {{ .Values.env.APP_ENV | quote }}

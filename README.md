@@ -101,25 +101,26 @@ Start a Local Cluster
 minikube start
 ```
 
-**📁Install Helm Chart**
+**📁Install Helm Chart with namespace**
 ```Bash
-helm install bookstore-api ./helm/bookstore-api \
+helm upgrade --install bookstore-api ./helm/bookstore-api \
+  --namespace bookstore --create-namespace \
   --set image.repository=ghcr.io/gabrielpora/docker-pipeline-demo \
   --set image.tag=latest
 ```
 
 **Check Pods and Services**
 ```Bash
-kubectl get pods
+kubectl get pods -n bookstore
 ```
 ```Bash
-kubectl get svc
+kubectl get svc -n bookstore
 ```
 
 **🌐 Access the API (via Port Forwarding or Ingress)**
 **Option 1: Port Forwarding**
 ```Bash
-kubectl port-forward svc/bookstore-api 8080:8080
+kubectl port-forward svc/bookstore-api 8080:8080 -n bookstore
 ```
 Now visit: http://localhost:8080/docs
 
@@ -130,7 +131,7 @@ minikube addons enable ingress
 ```
 Then, update your /etc/hosts file with the hostname (bookstore.local) and map it to your Minikube IP.
 
-**🧪 Test working**
+**🧪 Test working After completing Access the API step**
 Follow instructions at end of the doc to populate books using the swagger page.
 You can run the below once completed.
 ```Bash
@@ -141,30 +142,27 @@ Should see a json result
 [{"id":1,"title":"Test","author":"Tester","description":"Test description string","price":99.0}]
 ```
 
-**🧼 Best practice: If having issues Clean Up Old Releases**
-```Bash
-helm uninstall bookstore-api
-```
-
-Wait a few seconds, then check if the Ingress resource is gone:
-```Bash
-kubectl get ingress -A
-```
-
-If you still see an Ingress for bookstore.local, delete it manually:
-```Bash
-kubectl delete ingress <ingress-name> -n <namespace>
-```
-**For Example**
-```Bash
-kubectl delete ingress bookstore-api -n bookstore
-```
-
-**Deploy to a cluster**
-```Bash
-helm upgrade --install bookstore-api ./bookstore-api-1.0.0.tgz \
-  --namespace bookstore --create-namespace
-```
+> **Troubleshooting Ingress Errors**
+>
+> If you see an error like:
+> `admission webhook "validate.nginx.ingress.kubernetes.io" denied the request: host "bookstore.local" and path "/" is already defined in ingress ...`
+>
+> 1. Uninstall the old release:
+>    ```bash
+>    helm uninstall bookstore-api
+>    ```
+> 2. Check for leftover Ingress resources:
+>    ```bash
+>    kubectl get ingress -A
+>    ```
+> 3. Delete any remaining Ingress with the same host/path:
+>    ```bash
+>    kubectl delete ingress <ingress-name> -n <namespace>
+>    ```
+>    **For Example**
+>    ```Bash
+>    kubectl delete ingress bookstore-api -n bookstore
+>    ```
 
 
 # ⚙️ Configuration 
